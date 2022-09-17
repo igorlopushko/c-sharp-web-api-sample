@@ -8,21 +8,20 @@ namespace WebApplication11.Infrastructure;
 public class DataProvider : IDataProvide
 {
     private readonly List<Product> _storage;
-    private readonly DataProviderOptions _dataProviderOptions;
     private int _idCount;
 
-    public DataProvider(IOptions<DataProviderOptions> dataProviderOptions)
+    public DataProvider()
     {
         _storage = new List<Product>();
-        _dataProviderOptions = dataProviderOptions.Value;
         _idCount = 0;
     }
     
-    public void Create(Product product)
+    public int Create(Product product)
     {
         product.Id = _idCount;
         _storage.Add(product);
         _idCount++;
+        return product.Id;
     }
 
     public Product Select(int id)
